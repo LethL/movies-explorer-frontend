@@ -2,6 +2,7 @@
     background-color: #465DFF;
     position: relative;
     min-height: 560px;
+    overflow: hidden;
 }
 
 .promo__title {
@@ -19,4 +20,42 @@
     position: absolute;
     right: 70px;
     bottom: 60px;
+}
+
+@media (max-width: 800px) {
+    .promo {
+        min-height: 844px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .promo__title {
+        padding: 0 0 139px 0px;
+        text-align: center;
+    }
+
+    .promo__logo {
+        width: 680xp;
+        height: 230px;
+        right: 44px;
+        bottom: 70px;
+    }
+}
+
+@media (max-width: 550px) {
+    .promo {
+        min-height: 630px;
+    }
+
+    .promo__title {
+        font-size: 31px;
+        line-height: 39px;
+        padding: 0 0 146px 0px;
+    }
+
+    .promo__logo {
+        right: -181px;
+        bottom: 40px;
+    }
 }

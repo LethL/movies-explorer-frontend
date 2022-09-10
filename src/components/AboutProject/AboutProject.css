@@ -38,8 +38,7 @@
 }
 
 .about__info-text {
-    margin: 0;
-    padding-top: 26px;
+    margin: 26px 0 0 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -87,4 +86,100 @@
 
 .about__progress-text_front {
     width: 80%;
+}
+
+@media (max-width: 800px) {
+    .about {
+        padding: 90px 50px;
+    }
+
+    .about__info {
+        max-width: 320px;
+    }
+
+    .about__info-text {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 22px 0 0 0;
+    }
+
+    .about__content {
+        padding: 93px 0 93px 0;
+    }
+
+    .about__progress-item_short {
+        width: 21%;
+    }
+
+    .about__progress-item_long {
+        width: 79%;
+    }
+
+    .about__progress-text_back {
+        width: 21%;
+    }
+
+    .about__progress-text_front {
+        width: 79%;
+    }
+}
+
+@media (max-width: 520px) {
+    .about {
+        padding: 70px 18px;
+    }
+
+    .about__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .about__title::after {
+        top: 28px;
+    }
+
+    .about__content {
+        flex-direction: column;
+        align-items: center;
+        padding: 89px 0 60px 0;
+        min-height: 271px;
+    }
+
+    .about__info-title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .about__info-text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 15px 0 0 0;
+    }
+
+    .about__progress-item {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .about__progress-item_short {
+        width: 35%;
+    }
+
+    .about__progress-item_long {
+        width: 65%;
+    }
+
+    .about__progress-text {
+        font-size: 11px;
+        line-height: 13px;
+        margin: 9px 0 0 0;
+    }
+
+    .about__progress-text_back {
+        width: 35%;
+    }
+
+    .about__progress-text_front {
+        width: 65%;
+    }
 }

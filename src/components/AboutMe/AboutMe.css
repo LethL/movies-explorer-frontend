@@ -66,3 +66,78 @@
     margin-top: 99px;
     cursor: pointer;
 }
+
+@media (max-width: 800px) {
+    .me {
+        padding: 90px 50px;
+    }
+
+    .me__bio-title {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .me__bio-subtitle {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 15px 0 20px;
+    }
+
+    .me__bio-text {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 364px;
+    }
+
+    .me__photo {
+        width: 255px;
+        height: 307px;
+    }
+}
+
+@media (max-width: 520px) {
+    .me__content {
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+        margin-top: 88px;
+    }
+
+    .me__bio {
+        margin-top: 40px;
+    }
+
+    .me {
+        padding: 70px 14px;
+    }
+
+    .me__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .me__title::after {
+        top: 28px;
+    }
+
+    .me__photo {
+        width: 292px;
+        height: 352px;
+    }
+
+    .me__bio-title {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .me__bio-subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 20px 0 20px;
+    }
+
+    .me__bio-text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0 0 103px 0;
+    }
+}

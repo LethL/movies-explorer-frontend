@@ -50,3 +50,51 @@
     color: #000000;
     margin-left: 20px;
 }
+
+@media (max-width: 800px) {
+    .footer {
+        padding: 79px 30px 20px;
+        background-color: #FFFFFF;
+    }
+}
+
+@media (max-width: 520px) {
+    .footer {
+        padding: 79px 10px 10px;
+    }
+
+    .footer__title {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .footer__info {
+        flex-direction: column-reverse;
+        min-height: 86px;
+        align-items: center;
+        margin-top: 48px;
+    }
+
+    .footer__links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer__link-item {
+        margin-left: 0;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .footer__link {
+        margin-bottom: 10px;
+    }
+
+    .footer__link-item {
+        margin-bottom: 10px;
+    }
+
+    .footer__info-year {
+        color: #A0A0A0;
+    }
+}

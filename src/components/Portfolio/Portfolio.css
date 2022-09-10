@@ -39,10 +39,50 @@
     top: 18px;
 }
 
+.portfolio__item:last-child::after {
+    display: none;
+}
+
 .portfolio__item-name {
     margin: 0;
     font-weight: 400;
     font-size: 30px;
     line-height: 50px;
     letter-spacing: -0.04em;
+}
+
+@media (max-width: 800px) {
+    .portfolio {
+        padding: 0 50px 90px;
+    }
+
+    .portfolio__text {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .portfolio__item-name {
+        font-size: 28px;
+        line-height: 50px;
+    }
+}
+
+@media (max-width: 520px) {
+    .portfolio {
+        padding: 0 14px 70px;
+    }
+
+    .portfolio__text {
+        font-size: 14px;
+        line-height: 20px
+    }
+
+    .portfolio__items {
+        margin: 40px 0 0 0;
+    }
+
+    .portfolio__item-name {
+        font-size: 18px;
+        line-height: 28px;
+    }
 }
