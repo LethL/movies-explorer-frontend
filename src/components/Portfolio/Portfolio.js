@@ -3,7 +3,7 @@ import linkLogo from "../../images/link-logo.svg";
 
 function Portfolio() {
     return(
-        <div className="portfolio">
+        <section className="portfolio">
             <p className="portfolio__text">Портфолио</p>
             <ul className="portfolio__items">
                 <li className="portfolio__item">
@@ -19,7 +19,7 @@ function Portfolio() {
                     <a className="portfolio__item-link" target="_blank" href="https://github.com/LethL/react-mesto-api-full" rel="noreferrer"><img src={linkLogo} alt="ссылка"></img></a>
                 </li>
             </ul>
-        </div>
+        </section>
     );
 }
 
