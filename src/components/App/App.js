@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 function App() {
     return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/saved-movies">
             <SavedMovies />
+        </Route>
+        <Route path="/profile">
+            <Profile />
         </Route>
         <Footer />
       </div>
