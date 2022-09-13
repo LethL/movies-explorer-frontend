@@ -6,6 +6,7 @@ import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import Register from "../Register/Register";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/profile">
             <Profile />
         </Route>
+        <Register path="/signup" />
         <Footer />
       </div>
     );
