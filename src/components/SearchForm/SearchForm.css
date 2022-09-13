@@ -1,5 +1,5 @@
 .search {
-    padding: 80px 70px 40px;
+    padding: 76px 70px 40px;
 }
 
 .search::after {
@@ -106,7 +106,7 @@
 
 @media (max-width: 820px) {
     .search {
-        padding: 80px 30px 40px;
+        padding: 76px 30px 40px;
     }
 
     .search__filter-content {
@@ -116,7 +116,7 @@
 
 @media (max-width: 767px) {
     .search {
-        padding: 80px 14px 40px;
+        padding: 76px 14px 40px;
     }
 
     .search__input {

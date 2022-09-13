@@ -1,7 +1,7 @@
 .promo {
     background-color: #465DFF;
     position: relative;
-    min-height: 560px;
+    min-height: 556px;
     overflow: hidden;
 }
 
@@ -13,7 +13,7 @@
     line-height: 52px;
     letter-spacing: -0.04em;
     max-width: 626px;
-    padding: 50px 0 0 70px;
+    padding: 46px 0 0 70px;
 }
 
 .promo__logo {
@@ -24,7 +24,7 @@
 
 @media (max-width: 800px) {
     .promo {
-        min-height: 844px;
+        min-height: 840px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -45,7 +45,7 @@
 
 @media (max-width: 550px) {
     .promo {
-        min-height: 630px;
+        min-height: 626px;
     }
 
     .promo__title {

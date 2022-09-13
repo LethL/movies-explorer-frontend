@@ -2,8 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 74px 0 70px 0;
-    /* height: calc(100vh - 210px); */
+    padding: 70px 0 70px 0;
 }
 
 .profile__form {
@@ -73,7 +72,7 @@
 
 @media (max-width: 800px) {
     .profile {
-        padding: 236px 0 269px 0;
+        padding: 232px 0 269px 0;
     }
 
     .profile__title {
@@ -87,7 +86,7 @@
 
 @media (max-width: 440px) {
     .profile {
-        padding: 70px 0 40px 0;
+        padding: 66px 0 40px 0;
     }
 
     .profile__form {

@@ -5,7 +5,7 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-function Header() {
+function Main() {
     return(
         <main className="main">
             <Promo />
@@ -17,4 +17,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default Main;

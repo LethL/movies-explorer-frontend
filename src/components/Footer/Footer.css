@@ -3,6 +3,10 @@
     background-color: #FAFAFA;
 }
 
+.footer_disabled {
+    display: none;
+}
+
 .footer__title {
     margin: 0;
     font-weight: 400;

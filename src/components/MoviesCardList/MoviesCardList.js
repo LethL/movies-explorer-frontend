@@ -2,8 +2,6 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
-    console.log(props);
-
     return(
         <section className="movies__content">
             <ul className={`movies__list ${props.savedMovies ? "movies__list_save" : ""}`}>
