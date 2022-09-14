@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
-import { Route} from "react-router-dom";
+import { Link , Route } from "react-router-dom";
+import { useState } from 'react';
 import "./Navigation.css";
 
 function Navigation() {
     const routes = ['/movies', '/saved-movies', '/profile'];
+
+    const [isClicked, setIsClicked] = useState(false);
+
+    function handleClickMenu() {
+      setIsClicked(!isClicked)
+      console.log(isClicked);
+    }
 
     return(
         <div className="navigation">
@@ -24,8 +31,22 @@ function Navigation() {
                     <Link to="/profile" className="navigation__account">Аккаунт</Link>
                     <Link to="/profile" className="navigation-item"><button className="navigation-item navigation_account-btn" type="button"></button></Link>
                 </div>
-                <div className="navigation__burger">
+                <div className="navigation__burger" onClick={handleClickMenu}>
                     <span className="navigation__burger-item"></span>
+                </div>
+                <div className={`navigation__menu ${isClicked ? 'navigation__menu_active' : ''}`}>
+                    <div className={`navigation__menu-content ${isClicked ? 'navigation__menu-content_active' : ''}`}>
+                        <span className="navigation__menu-burger" onClick={handleClickMenu}></span>
+                        <div className="navigation__menu-links">
+                            <Link to="/" className="navigation__menu-link">Главная</Link>
+                            <Link to="/movies" className="navigation__menu-link navigation__menu-link_active">Фильмы</Link>
+                            <Link to="saved-movies" className="navigation__menu-link">Сохранённые фильмы</Link>
+                        </div>
+                        <div className="navigation__menu-content-account">
+                            <Link to="/profile" className="navigation__account">Аккаунт</Link>
+                            <Link to="/profile" className="navigation-item"><button className="navigation-item navigation_account-btn" type="button"></button></Link>
+                        </div>
+                    </div>
                 </div>
             </Route>
         </div>

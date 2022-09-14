@@ -111,6 +111,97 @@
     top: 8px;
 }
 
+.navigation__menu {
+    z-index: 10;
+    position: fixed;
+    background-color:rgba(0, 0, 0, 0.3);
+    display: flex;
+    right: -600px;
+    justify-content: flex-end;
+    transition: right .3s ease-in;
+    text-align: center;
+}
+
+.navigation__menu_active {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+}
+
+.navigation__menu-content {
+    width: 520px;
+    height: 100%;
+    background-color: #FFFFFF;
+    right: -600px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.navigation__menu-content_active {
+    right: 0;
+}
+
+.navigation__menu-burger {
+    width: 23px;
+    height: 3px;
+    display: block;
+    background-color: #000000;
+    cursor: pointer;
+    top: 36px;
+    right: 26px;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.navigation__menu-burger::after {
+    content: "";
+    width: 23px;
+    height: 3px;
+    display: block;
+    background-color: #000000;
+    cursor: pointer;
+    position: relative;
+    transform: rotate(90deg);
+}
+
+.navigation__menu-links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 160px;
+    min-height: 126px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation__menu-link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    margin: 0;
+    max-width: 74px;
+    padding-bottom: 4px;
+}
+
+.navigation__menu-link:last-child {
+    max-width: 200px;
+}
+
+.navigation__menu-link_active {
+    border-bottom: 2px solid #000000;
+}
+
+.navigation__menu-content-account {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 92px;
+    right: 40%;
+}
+
 @media (max-width: 800px) {
     .navigation {
         justify-content: flex-end;
@@ -139,5 +230,24 @@
         width: 54px;
         height: 26px;
         margin-left: 14px;
+    }
+
+    .navigation__menu-content {
+        width: 100%;
+    }
+
+    .navigation__menu-burger {
+        top: 28px;
+        right: 18px;
+    }
+
+    .navigation__menu-links {
+        margin-top: 144px;
+        min-height: 118px;
+    }
+
+    .navigation__menu-content-account {
+        bottom: 48px;
+        right: 34%;
     }
 }
