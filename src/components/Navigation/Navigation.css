@@ -17,6 +17,11 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+    transition: opacity .2s linear;
+}
+
+.navigation__registration:hover {
+    opacity: .7;
 }
 
 .navigation__registration-btn {
@@ -32,6 +37,11 @@
 .navigation__account-wrapper {
     display: flex;
     align-items: center;
+    transition: opacity .2s linear;
+}
+
+.navigation__account-wrapper:hover {
+    opacity: 0.7;
 }
 
 .navigation__account {
@@ -68,6 +78,11 @@
     line-height: 18px;
     color: #000000;
     margin-right: 20px;
+    transition: opacity .2s linear;
+}
+
+.navigation__films-item:hover {
+    opacity: 0.7;
 }
 
 .navigation__films-item_active {
@@ -99,6 +114,11 @@
     background-color: #000000;
     margin-right: 8px;
     cursor: pointer;
+    transition: opacity .2s linear;
+}
+
+.navigation__burger-item:hover {
+    opacity: 0.7;
 }
 
 .navigation__burger-item::after {
@@ -153,6 +173,11 @@
     right: 26px;
     transform: rotate(45deg);
     position: absolute;
+    transition: opacity .2s linear;
+}
+
+.navigation__menu-burger:hover {
+    opacity: .7;
 }
 
 .navigation__menu-burger::after {
@@ -184,6 +209,11 @@
     margin: 0;
     max-width: 74px;
     padding-bottom: 4px;
+    transition: opacity .2s linear;
+}
+
+.navigation__menu-link:hover {
+    opacity: .7;
 }
 
 .navigation__menu-link:last-child {
@@ -200,6 +230,11 @@
     position: absolute;
     bottom: 92px;
     right: 40%;
+    transition: opacity .2s linear;
+}
+
+.navigation__menu-content-account:hover {
+    opacity: .7;
 }
 
 @media (max-width: 800px) {

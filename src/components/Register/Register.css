@@ -53,6 +53,11 @@
     line-height: 17px;
     color: #FFFFFF;
     cursor: pointer;
+    transition: opacity .2s linear;
+}
+
+.register__form-btn:hover {
+    opacity: 0.8;
 }
 
 .register__form-text {
@@ -67,6 +72,11 @@
 .register__form-link {
     text-decoration: none;
     color: #FF6838;
+    transition: opacity .2s linear;
+}
+
+.register__form-link:hover {
+    opacity: 0.8;
 }
 
 @media (max-width: 800px) {

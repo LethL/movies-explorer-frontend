@@ -53,6 +53,11 @@
     line-height: 16px;
     color: #000000;
     margin-left: 20px;
+    transition: opacity .2s linear;
+}
+
+.footer__link-item:hover {
+    opacity: .7;
 }
 
 @media (max-width: 800px) {

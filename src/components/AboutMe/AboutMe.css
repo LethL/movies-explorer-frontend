@@ -65,6 +65,11 @@
     line-height: 17px;
     margin-top: 99px;
     cursor: pointer;
+    transition: opacity .2s linear;
+}
+
+.me__bio-link:hover {
+    opacity: .7;
 }
 
 @media (max-width: 800px) {

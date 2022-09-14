@@ -51,6 +51,14 @@
     letter-spacing: -0.04em;
 }
 
+.portfolio__item-link {
+    transition: opacity .2s linear;
+}
+
+.portfolio__item-link:hover {
+    opacity: .7;
+}
+
 @media (max-width: 800px) {
     .portfolio {
         padding: 0 50px 90px;
