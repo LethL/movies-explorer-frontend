@@ -43,6 +43,10 @@
     display: none;
 }
 
+.movies__list-problem {
+    text-align: center;
+}
+
 @media (max-width: 1279px) {
     .movies__content {
         padding: 78px 30px 10px 30px;

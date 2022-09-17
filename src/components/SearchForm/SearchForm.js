@@ -43,7 +43,7 @@ function SearchForm(props) {
                 onChange={props.onCheckbox}
                 >
                 </input>
-                <input className="search__filter-input search__filter-input_on"
+                <input className="search__filter-input"
                 type="radio"
                 value="on"
                 name="shortMovies"

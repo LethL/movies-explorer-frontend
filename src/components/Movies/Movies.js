@@ -13,6 +13,9 @@ function Movies() {
   const [Movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [shortMovies, setShortMovies] = React.useState(handlerCheckbox);
+  const [loading, setLoading] = React.useState(false);
+  const [notFoundMovies, setnotFoundMovies] = React.useState(false);
+  const [isLoadingError, setisLoadingError] = React.useState(false);
 
   function handlerFilteredMovies(movies, query, checkbox) {
     const moviesList = filterMovies(movies, query);
@@ -23,11 +26,12 @@ function Movies() {
   }
 
   function handlerSearch(value) {
+    setLoading(true)
     setSearchQuery(value);
     localStorage.setItem("searchQuery", value);
     localStorage.setItem("shortMovies", shortMovies);
     // console.log(value);
-    console.log(localStorage);
+    // console.log(localStorage);
     api
       .getMovies()
       .then((data) => {
@@ -36,13 +40,19 @@ function Movies() {
         handlerFilteredMovies(data, value);
       })
       .catch((err) => {
+        setisLoadingError(true);
         console.log(err);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   function handlerSetCheckbox(e) {
     setShortMovies(e.target.value);
     localStorage.setItem("shortMovies", e.target.value);
+  }
+
+  function handlerNotFoundMovies(moviesArr) {
+    moviesArr.length === 0 ? setnotFoundMovies(true) : setnotFoundMovies(false);
   }
 
   React.useEffect(() => {
@@ -51,12 +61,14 @@ function Movies() {
     setFilteredMovies(
       shortMovies === "on" ? filterShortMovies(moviesArr) : moviesArr
     );
+    handlerNotFoundMovies(moviesArr);
   }, [shortMovies, searchQuery]);
 
   React.useEffect(() => {
     if (searchQuery) {
       const moviesArr = filterMovies(Movies, searchQuery, shortMovies);
       setFilteredMovies(moviesArr);
+      handlerNotFoundMovies(moviesArr);
     }
   }, [searchQuery, Movies, shortMovies]);
 
@@ -67,7 +79,12 @@ function Movies() {
         onCheckbox={handlerSetCheckbox}
         shortMovies={shortMovies}
       />
-      <MoviesCardList movies={filteredMovies} />
+      <MoviesCardList
+        movies={filteredMovies}
+        loading={loading}
+        notFoundMovies={notFoundMovies}
+        isLoadingError={isLoadingError}
+      />
     </section>
   );
 }

@@ -101,7 +101,7 @@
     cursor: pointer;
 }
 
-.search__filter-input:checked{
+.search__filter-input:checked {
     z-index: 1;
 }
 
