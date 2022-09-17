@@ -3,8 +3,8 @@ import searchLogo from "../../images/search-logo.svg";
 import React from "react";
 
 
-function SearchForm({Search}) {
-    const [value, setValue] = React.useState('');
+function SearchForm(props) {
+    const [value, setValue] = React.useState("");
 
     function handleChangeValue(e) {
         setValue(e.target.value);
@@ -12,8 +12,15 @@ function SearchForm({Search}) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        Search(value)
-      }
+        props.Search(value)
+    }
+
+    React.useEffect(() => {
+        const input = localStorage.getItem("searchQuery");
+        if(input){
+          setValue(input);
+        }
+      }, [])
 
     return(
         <form className="search" onSubmit={handleSubmit}>
@@ -27,8 +34,23 @@ function SearchForm({Search}) {
                 <button className="search__btn" type="submit"><img src={searchLogo} alt="Поиск"></img></button>
             </div>
             <div className="search__filter-content">
-                <label className="search__filter-input">
-                <input className="search__filter-checkbox" type="checkbox"></input>
+                <label className={`search__filter-label ${props.shortMovies === "on" ? "search__filter-label_on" : ""}`}>
+                <input className="search__filter-input"
+                type="radio"
+                value="off"
+                name="shortMovies"
+                checked={props.shortMovies === "off" ? true : false}
+                onChange={props.onCheckbox}
+                >
+                </input>
+                <input className="search__filter-input search__filter-input_on"
+                type="radio"
+                value="on"
+                name="shortMovies"
+                checked={props.shortMovies === "on" ? true : false}
+                onChange={props.onCheckbox}
+                >
+                </input>
                 <span className="search__filter-switcher"></span>
                 </label>
                 <p className='search__filter-name'>Короткометражки</p>
