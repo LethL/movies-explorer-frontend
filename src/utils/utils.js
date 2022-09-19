@@ -1,19 +1,23 @@
 import React from "react";
 
-export function filterMovies(movies, searchQuery) {
+export function filterShortMovies(movies) {
+  return movies.filter((item) => {
+    return item.duration <= 40;
+  });
+}
+
+export function filterMovies(movies, searchQuery, shortMovies) {
   const moviesByQuery = movies.filter((item) => {
     const strRu = String(item.nameRU).toLowerCase();
     const searchStr = searchQuery.toLowerCase().trim();
     return strRu.indexOf(searchStr) !== -1;
   });
 
-  return moviesByQuery;
-}
+  if (shortMovies === "on") {
+    return filterShortMovies(moviesByQuery);
+  }
 
-export function filterShortMovies(movies) {
-  return movies.filter((item) => {
-    return item.duration <= 40;
-  });
+  return moviesByQuery;
 }
 
 export function useWindowWidth() {

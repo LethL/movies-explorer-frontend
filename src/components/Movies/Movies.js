@@ -30,12 +30,9 @@ function Movies() {
     setSearchQuery(value);
     localStorage.setItem("searchQuery", value);
     localStorage.setItem("shortMovies", shortMovies);
-    // console.log(value);
-    // console.log(localStorage);
     api
       .getMovies()
       .then((data) => {
-        // console.log(data);
         setMovies(data);
         handlerFilteredMovies(data, value);
       })
