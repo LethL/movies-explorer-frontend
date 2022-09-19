@@ -1,6 +1,8 @@
 .movies__content {
     padding: 77px 70px 11px 70px;
     min-height: 518px;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .movies__list {
@@ -39,7 +41,7 @@
     opacity: 0.8;
 }
 
-.movies__list-btn_delete {
+.movies__list-btn_off {
     display: none;
 }
 
@@ -53,7 +55,6 @@
     }
 
     .movies__list {
-        overflow: hidden;
         column-gap: 30px;
         row-gap: 30px;
     }
@@ -61,7 +62,6 @@
 
 @media (max-width: 820px) {
     .movies__list {
-        max-height: 1159px;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
 }
@@ -73,7 +73,6 @@
 
     .movies__list {
         row-gap: 14px;
-        max-height: 1255px;
     }
 
     .movies__list_save {
