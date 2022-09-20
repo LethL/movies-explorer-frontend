@@ -5,9 +5,9 @@ import api from "../../utils/MoviesApi";
 import React from "react";
 import { filterMovies, filterShortMovies } from "../../utils/utils.js";
 
-function Movies() {
-  const handlerCheckbox =
-    localStorage.getItem("shortMovies") === "on" ? "on" : "off";
+function Movies(props) {
+  // console.log(props.savedMoviesPage);
+  const handlerCheckbox = localStorage.getItem("shortMovies") === "on" ? "on" : "off";
 
   const [searchQuery, setSearchQuery] = React.useState("");
   const [Movies, setMovies] = React.useState([]);
@@ -81,6 +81,7 @@ function Movies() {
         loading={loading}
         notFoundMovies={notFoundMovies}
         isLoadingError={isLoadingError}
+        savedMoviesPage={props.savedMoviesPage}
       />
     </section>
   );

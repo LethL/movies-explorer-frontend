@@ -16,17 +16,20 @@ function SearchForm(props) {
     }
 
     React.useEffect(() => {
-        const input = localStorage.getItem("searchQuery");
-        if(input){
-          setValue(input);
+        if (!props.savedMoviesPage) {
+            const input = localStorage.getItem("searchQuery");
+            if (input) {
+              setValue(input);
+            }
         }
-      }, [])
+      }, [props.savedMoviesPage, setValue])
 
     return(
         <form className="search" onSubmit={handleSubmit}>
             <div className="search__content">
                 <input className="search__input"
-                required type="text"
+                required
+                type="text"
                 placeholder="Фильм"
                 onChange={handleChangeValue}
                 value={value}>

@@ -1,4 +1,4 @@
-import { Link , Route } from "react-router-dom";
+import { Link , Route, NavLink } from "react-router-dom";
 import { useState } from 'react';
 import "./Navigation.css";
 
@@ -23,8 +23,8 @@ function Navigation() {
             <Route path={routes}>
                 <ul className="navigation__films">
                     <li>
-                        <Link to="/movies" className="navigation__films-item navigation__films-item_active">Фильмы</Link>
-                        <Link to="/saved-movies" className="navigation__films-item">Сохранённые фильмы</Link>
+                        <NavLink to="/movies" className="navigation__films-item" activeClassName="navigation__films-item_active">Фильмы</NavLink>
+                        <NavLink to="/saved-movies" className="navigation__films-item" activeClassName="navigation__films-item_active">Сохранённые фильмы</NavLink>
                     </li>
                 </ul>
                 <div className="navigation__account-wrapper">
@@ -38,9 +38,9 @@ function Navigation() {
                     <div className={`navigation__menu-content ${isClicked ? 'navigation__menu-content_active' : ''}`}>
                         <span className="navigation__menu-burger" onClick={handleClickMenu}></span>
                         <div className="navigation__menu-links">
-                            <Link to="/" className="navigation__menu-link">Главная</Link>
-                            <Link to="/movies" className="navigation__menu-link navigation__menu-link_active">Фильмы</Link>
-                            <Link to="saved-movies" className="navigation__menu-link">Сохранённые фильмы</Link>
+                            <NavLink exact to="/" className="navigation__menu-link" activeClassName="navigation__menu-link_active">Главная</NavLink>
+                            <NavLink to="/movies" className="navigation__menu-link" activeClassName="navigation__menu-link_active">Фильмы</NavLink>
+                            <NavLink to="saved-movies" className="navigation__menu-link" activeClassName="navigation__menu-link_active">Сохранённые фильмы</NavLink>
                         </div>
                         <div className="navigation__menu-content-account">
                             <Link to="/profile" className="navigation__account">Аккаунт</Link>
