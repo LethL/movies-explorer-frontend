@@ -10,21 +10,20 @@ function Register(props) {
 
   function handleChangeName(e) {
     setName(e.target.value);
-    console.log(name);
-  }
+  };
 
   function handleChangeEmail(e) {
     setEmail(e.target.value);
-  }
+  };
 
   function handleChangePassword(e) {
     setPassword(e.target.value);
-  }
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     props.onRegister(email, password, name);
-  }
+  };
 
   return (
     <section className="register">

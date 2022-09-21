@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.css";
 
-function Profile() {
+function Profile(props) {
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
 
@@ -44,7 +44,7 @@ function Profile() {
                     />
                 </label>
                 <button className="profile__btn profile__btn_edit" type="submit">Редактировать</button>
-                <button className="profile__btn profile__btn_exit" type="submit">Выйти из аккаунта</button>
+                <button className="profile__btn profile__btn_exit" type="button" onClick={props.onLogOut}>Выйти из аккаунта</button>
             </form>
         </section>
     );

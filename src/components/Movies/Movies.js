@@ -7,7 +7,8 @@ import { filterMovies, filterShortMovies } from "../../utils/utils.js";
 
 function Movies(props) {
   // console.log(props.handleLikeMovie);
-  const handlerCheckbox = localStorage.getItem("shortMovies") === "on" ? "on" : "off";
+  const handlerCheckbox =
+    localStorage.getItem("shortMovies") === "on" ? "on" : "off";
 
   const [searchQuery, setSearchQuery] = React.useState("");
   const [Movies, setMovies] = React.useState([]);
@@ -26,7 +27,7 @@ function Movies(props) {
   }
 
   function handlerSearch(value) {
-    setLoading(true)
+    setLoading(true);
     setSearchQuery(value);
     localStorage.setItem("searchQuery", value);
     localStorage.setItem("shortMovies", shortMovies);
@@ -49,16 +50,22 @@ function Movies(props) {
   }
 
   function handlerNotFoundMovies(moviesArr) {
-    moviesArr.length === 0 ? setnotFoundMovies(true) : setnotFoundMovies(false);
+    if (moviesArr) {
+      moviesArr.length === 0
+        ? setnotFoundMovies(true)
+        : setnotFoundMovies(false);
+    }
   }
 
   React.useEffect(() => {
     const moviesArr = JSON.parse(localStorage.getItem("movies"));
-    setShortMovies(localStorage.getItem("shortMovies"));
-    setFilteredMovies(
-      shortMovies === "on" ? filterShortMovies(moviesArr) : moviesArr
-    );
-    handlerNotFoundMovies(moviesArr);
+    if (moviesArr) {
+      setShortMovies(localStorage.getItem("shortMovies"));
+      setFilteredMovies(
+        shortMovies === "on" ? filterShortMovies(moviesArr) : moviesArr
+      );
+      handlerNotFoundMovies(moviesArr);
+    }
   }, [shortMovies, searchQuery]);
 
   React.useEffect(() => {

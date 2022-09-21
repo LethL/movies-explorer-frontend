@@ -2,7 +2,7 @@ class Api {
   constructor(option) {
     this._url = option.url;
     this._headers = option.headers;
-  }
+} 
 
   _handleResponse(res) {
     if (res.ok) {
@@ -11,20 +11,15 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  // getUserData() {
-  //   return fetch(`${this._url}/movies`, {
-  //       headers: {
-  //         authorization: this._token,
-  //       },
-  //       credentials: 'include',
-  //     })
-  //     .then(res => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       return Promise.reject(`Ошибка: ${res.status}`);
-  //     })
-  // }
+  getUser() {
+    return fetch(`${this._url}/users/me`, {
+      credentials: 'include',
+      method: 'GET',
+      headers: this._headers
+      }).then((res) => {
+        return this._handleResponse(res)
+    })
+  }
 
   saveMovie({
     country,
