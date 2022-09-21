@@ -50,7 +50,11 @@ function MoviesCardList(props) {
 
   function getMainMoviesPage() {
     return cardsList.map((item) => {
-      return <MoviesCard key={item.id} card={item} />;
+      return <MoviesCard
+      key={item.id}
+      card={item}
+      handleLikeMovie={props.handleLikeMovie}
+      />;
     });
   }
 

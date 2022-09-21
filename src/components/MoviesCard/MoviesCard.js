@@ -8,7 +8,8 @@ function MoviesCard(props) {
                 <p className="card__name">{props.card.nameRU}</p>
                 <p className="card__duration">{props.card.duration}</p>
             </div>
-            <button className={`card__like ${props.savedMovies ? "card__like_delete" : ""}`}></button>
+            <button className={`card__like ${props.savedMovies ? "card__like_delete" : ""}`}
+            onClick={props.handleLikeMovie}></button>
         </li>
     );
 }
