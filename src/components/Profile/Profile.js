@@ -1,9 +1,20 @@
 import React from "react";
 import "./Profile.css";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Profile(props) {
+    const currentUser = React.useContext(CurrentUserContext);
+
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
+
+    React.useEffect(() => {
+        if (currentUser) {
+            console.log(currentUser);
+          setName(currentUser.name);
+          setEmail(currentUser.email);
+        }
+      }, [currentUser]);
 
     function handleChangeName(e) {
         setName(e.target.value);

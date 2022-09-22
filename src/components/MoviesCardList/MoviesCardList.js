@@ -44,17 +44,31 @@ function MoviesCardList(props) {
         key={item._id}
         card={item}
         savedPage={props.savedMoviesPage}
+        handleDeleteMovie={props.handleDeleteMovie}
       />
     ));
   }
 
+  function getterSavedMovieCard(movies, id) {
+    return movies.find((item) => {
+      return item.movieId === id;
+    });
+  }
+
   function getMainMoviesPage() {
     return cardsList.map((item) => {
-      return <MoviesCard
-      key={item.id}
-      card={item}
-      handleLikeMovie={props.handleLikeMovie}
-      />;
+      const likedMovie = getterSavedMovieCard(props.savedMovies, item.id);
+      const likedMovieId = likedMovie ? likedMovie._id : null;
+      return (
+        <MoviesCard
+          key={item.id}
+          card={{ ...item, _id: likedMovieId }}
+          handleLikeMovie={props.handleLikeMovie}
+          savedPage={props.savedMoviesPage}
+          handleDeleteMovie={props.handleDeleteMovie}
+          isLiked={likedMovie ? true : false}
+        />
+      );
     });
   }
 
@@ -71,12 +85,13 @@ function MoviesCardList(props) {
       ) : (
         <>
           <ul className={`movies__list`}>
-            {props.savedMovies ? getSavedMoviesPage() : getMainMoviesPage()}
+            {props.savedMoviesPage ? getSavedMoviesPage() : getMainMoviesPage()}
           </ul>
           <div className="movies__list-btn-area">
             <button
               className={`movies__list-btn ${
-                props.savedMovies || cardsList.length === props.movies.length
+                props.savedMoviesPage ||
+                cardsList.length === props.movies.length
                   ? "movies__list-btn_off"
                   : ""
               }`}

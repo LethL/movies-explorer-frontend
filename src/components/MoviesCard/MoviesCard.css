@@ -58,6 +58,12 @@
     background-size: contain;
 }
 
+.card__like_active {
+    background: url(../../images/card-like_active.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 @media (max-width: 1220px) {
     .card {
         width: 339px;

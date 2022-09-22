@@ -44,8 +44,13 @@ function App() {
   }
 
   useEffect(() => {
+    tokenCheck();
+  });
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
     if (loggedIn) {
-      MainApi.getUser()
+      MainApi.getUser(jwt)
         .then((user) => {
           setCurrentUser(user);
         })
@@ -54,8 +59,15 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    tokenCheck();
-  });
+    const jwt = localStorage.getItem("jwt");
+    if (loggedIn) {
+      MainApi.getUserMovies(jwt)
+        .then((data) => {
+          setSavedMovies(data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   function handleRegister(email, password, name) {
     auth
@@ -87,12 +99,23 @@ function App() {
     setCurrentUser({});
     localStorage.clear();
     history.push("/");
-  };
+  }
 
   function handleSaveMovie(movie) {
-    MainApi.saveMovie(movie)
-      .then((newCard) => {
-        setSavedMovies([newCard, ...savedMovies]);
+    const jwt = localStorage.getItem("jwt");
+    MainApi.saveMovie(movie, jwt)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleDeleteMovie(movie) {
+    const jwt = localStorage.getItem("jwt");
+    MainApi.deleteMovie(movie._id, jwt)
+      .then(() => {
+        const newMovies = savedMovies.filter((newMovie) => newMovie._id === movie._id ? false : true);
+        setSavedMovies(newMovies);
       })
       .catch((err) => console.log(err));
   }
@@ -110,11 +133,15 @@ function App() {
             component={Movies}
             handleLikeMovie={handleSaveMovie}
             loggedIn={loggedIn}
+            savedMovies={savedMovies}
+            handleDeleteMovie={handleDeleteMovie}
           />
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
+            savedMovies={savedMovies}
+            handleDeleteMovie={handleDeleteMovie}
           />
           <ProtectedRoute
             path="/profile"

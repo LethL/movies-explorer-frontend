@@ -6,7 +6,6 @@ import React from "react";
 import { filterMovies, filterShortMovies } from "../../utils/utils.js";
 
 function Movies(props) {
-  // console.log(props.handleLikeMovie);
   const handlerCheckbox =
     localStorage.getItem("shortMovies") === "on" ? "on" : "off";
 
@@ -90,6 +89,8 @@ function Movies(props) {
         isLoadingError={isLoadingError}
         savedMoviesPage={props.savedMoviesPage}
         handleLikeMovie={props.handleLikeMovie}
+        savedMovies={props.savedMovies}
+        handleDeleteMovie={props.handleDeleteMovie}
       />
     </section>
   );

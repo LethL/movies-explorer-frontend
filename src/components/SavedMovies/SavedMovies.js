@@ -7,12 +7,13 @@ import { filterMovies } from "../../utils/utils.js";
 function SavedMovies(props) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [shortMovies, setShortMovies] = React.useState("off");
-  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [filteredMovies, setFilteredMovies] = React.useState(props.savedMovies);
+  const [notFoundMovies, setnotFoundMovies] = React.useState(false);
 
   function handlerSearch(value) {
     setSearchQuery(value);
     const savedMoviesList = filterMovies(
-      props.movies,
+      props.savedMovies,
       searchQuery,
       shortMovies
     );
@@ -23,6 +24,16 @@ function SavedMovies(props) {
     setShortMovies(e.target.value);
   }
 
+  React.useEffect(() => {
+    const moviesArr = filterMovies(props.savedMovies, searchQuery, shortMovies);
+    setFilteredMovies(moviesArr);
+    if (searchQuery) {
+      moviesArr.length === 0
+        ? setnotFoundMovies(true)
+        : setnotFoundMovies(false);
+    }
+  }, [searchQuery, props.savedMovies, shortMovies]);
+
   return (
     <section className="saved-movies">
       <SearchForm
@@ -31,7 +42,12 @@ function SavedMovies(props) {
         onCheckbox={handlerSetCheckbox}
         shortMovies={shortMovies}
       />
-      <MoviesCardList savedMoviesPage={true} movies={filteredMovies} />
+      <MoviesCardList
+        savedMoviesPage={true}
+        movies={filteredMovies}
+        notFoundMovies={notFoundMovies}
+        handleDeleteMovie={props.handleDeleteMovie}
+      />
     </section>
   );
 }

@@ -11,14 +11,30 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUser() {
+  getUser(token) {
     return fetch(`${this._url}/users/me`, {
       credentials: 'include',
       method: 'GET',
-      headers: this._headers
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      }
       }).then((res) => {
         return this._handleResponse(res)
     })
+  }
+
+  getUserMovies(token) {
+    return fetch(`${this._url}/movies`, {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      }
+    }).then((res) => {
+      return this._handleResponse(res)
+  })
   }
 
   saveMovie({
@@ -32,12 +48,13 @@ class Api {
     thumbnail,
     nameRU,
     nameEN,
-    movieId,
-  }) {
+    id,
+  }, token) {
     return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
       credentials: "include",
       body: JSON.stringify({
@@ -46,17 +63,30 @@ class Api {
         duration,
         year,
         description,
-        image,
-        trailerLink: trailerLink,
+        image: `https://api.nomoreparties.co${image.url}`,
+        trailerLink,
         nameRU,
         nameEN,
-        thumbnail,
-        movieId: movieId,
+        thumbnail: thumbnail || `https://api.nomoreparties.co${image.url}`,
+        movieId: id,
       }),
     }).then((res) => {
       return this._handleResponse(res);
     });
-  }
+  };
+
+  deleteMovie(movieId, token) {
+    return fetch(`${this._url}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      },
+      credentials: 'include',
+    }).then((res) => {
+      return this._handleResponse(res);
+    });
+  };
 }
 
 const MainApi = new Api({
