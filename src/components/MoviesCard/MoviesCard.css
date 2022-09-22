@@ -30,6 +30,7 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
+    color: #000000;
 }
 
 .card__duration {
@@ -62,6 +63,27 @@
     background: url(../../images/card-like_active.svg);
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.card__link {
+    display: block;
+    position: relative;
+}
+
+.card__link:after { 
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .7);
+    opacity: 0;
+    transition: opacity .2s linear;
+}
+
+.card__link:hover:after {
+    opacity: 1;
 }
 
 @media (max-width: 1220px) {

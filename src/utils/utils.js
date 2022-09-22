@@ -37,3 +37,10 @@ export function useWindowWidth() {
 
   return windowWidth;
 }
+
+
+export function setDurationMovies(min) {
+  const hours = Math.trunc(min/60);
+  const minutes = min % 60;
+  return `${hours}ч ${minutes}м`;
+}
