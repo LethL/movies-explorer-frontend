@@ -3,23 +3,15 @@ import "../Register/Register.css";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import React from "react";
+import useFormWithValidation from "../../hooks/useFormWithValidation";
 
 function Login(props) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  };
-
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  };
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onLogin(password, email);
-  };
+    props.onLogin(values.password, values.email);
+  }
 
   return (
     <section className="register">
@@ -38,9 +30,10 @@ function Login(props) {
             maxLength="30"
             required
             id="email"
-            value={email}
-            onChange={handleChangeEmail}
+            value={values.email || ""}
+            onChange={handleChange}
           />
+          <span className="register__form-error">{errors.email || ""}</span>
         </label>
         <label className="register__form-label">
           Пароль
@@ -52,14 +45,18 @@ function Login(props) {
             maxLength="30"
             required
             id="password"
-            value={password}
-            onChange={handleChangePassword}
+            value={values.password || ""}
+            onChange={handleChange}
             autoComplete="off"
           />
+          <span className="register__form-error">{errors.password || ""}</span>
         </label>
         <button
-          className="register__form-btn register__form-btn_login"
+          className={`register__form-btn ${
+            isValid ? "" : "register__form-btn_disabled"
+          }`}
           type="submit"
+          disabled={!isValid}
         >
           Войти
         </button>

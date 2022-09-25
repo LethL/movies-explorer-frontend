@@ -2,28 +2,15 @@ import "./Register.css";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import React from "react";
+import useFormWithValidation from "../../hooks/useFormWithValidation";
 
 function Register(props) {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  function handleChangeName(e) {
-    setName(e.target.value);
-  };
-
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  };
-
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  };
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onRegister(email, password, name);
-  };
+    props.onRegister(values.email, values.password, values.name);
+  }
 
   return (
     <section className="register">
@@ -42,9 +29,10 @@ function Register(props) {
             maxLength="30"
             required
             id="name"
-            value={name}
-            onChange={handleChangeName}
+            value={values.name || ""}
+            onChange={handleChange}
           />
+          <span className="register__form-error">{errors.name || ""}</span>
         </label>
         <label className="register__form-label">
           E-mail
@@ -56,9 +44,10 @@ function Register(props) {
             maxLength="30"
             required
             id="email"
-            value={email}
-            onChange={handleChangeEmail}
+            value={values.email || ""}
+            onChange={handleChange}
           />
+          <span className="register__form-error">{errors.email || ""}</span>
         </label>
         <label className="register__form-label">
           Пароль
@@ -70,12 +59,19 @@ function Register(props) {
             maxLength="30"
             required
             id="password"
-            value={password}
-            onChange={handleChangePassword}
+            value={values.password || ""}
+            onChange={handleChange}
             autoComplete="off"
           />
+          <span className="register__form-error">{errors.password || ""}</span>
         </label>
-        <button className="register__form-btn" type="submit">
+        <button
+          className={`register__form-btn ${
+            isValid ? "" : "register__form-btn_disabled"
+          }`}
+          type="submit"
+          disabled={!isValid}
+        >
           Зарегистрироваться
         </button>
         <p className="register__form-text">

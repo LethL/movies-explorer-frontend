@@ -14,10 +14,13 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import MainApi from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../utils/auth";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import successLogo from "../../images/success-logo.svg";
+import errorLogo from "../../images/error-logo.svg";
 
 function App() {
   const history = useHistory();
@@ -25,6 +28,8 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
+  const [status, setStatus] = React.useState({ image: null, message: "" });
 
   function tokenCheck() {
     if (localStorage.getItem("jwt")) {
@@ -74,23 +79,43 @@ function App() {
       .register(email, password, name)
       .then((data) => {
         if (data) {
+          setStatus({
+            image: successLogo,
+            message: "Вы успешно зарегистрировались!",
+          });
           handleLogin(password, data.email)
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setStatus({
+          image: errorLogo,
+          message: "Что-то пошло не так! Попробуйте ещё раз.",
+        })
+        console.log(err);
+      })
+      .finally(() => setInfoTooltipOpen(true));
   }
 
   function handleLogin(password, email) {
     auth
       .authorize(password, email)
       .then((res) => {
+        setStatus({
+          image: successLogo,
+          message: "С возвращением!",
+        })
         setLoggedIn(true);
         localStorage.setItem("jwt", res.token);
         history.push("/movies");
       })
       .catch((err) => {
+        setStatus({
+          image: errorLogo,
+          message: "Неправильные почта или пароль.",
+        })
         console.log(err);
-      });
+      })
+      .finally(() => setInfoTooltipOpen(true));
   }
 
   function handleLogOut(e) {
@@ -128,6 +153,10 @@ function App() {
         setCurrentUser(data);
       })
       .catch((err) => console.log(err));
+  };
+
+  function handlecloseTooltip() {
+    setInfoTooltipOpen(false);
   };
 
   return (
@@ -170,6 +199,12 @@ function App() {
             <PageNotFound />
           </Route>
         </Switch>
+        <InfoTooltip
+          onClose={handlecloseTooltip}
+          isOpen={isInfoTooltipOpen}
+          image={status.image}
+          message={status.message}
+        />
         <Footer />
       </div>
     </CurrentUserContext.Provider>
