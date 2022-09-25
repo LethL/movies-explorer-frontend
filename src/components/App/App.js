@@ -60,7 +60,7 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    if (loggedIn) {
+    if (jwt) {
       MainApi.getUserMovies(jwt)
         .then((data) => {
           setSavedMovies(data);
@@ -74,7 +74,7 @@ function App() {
       .register(email, password, name)
       .then((data) => {
         if (data) {
-          console.log(data);
+          handleLogin(password, data.email)
         }
       })
       .catch((err) => console.log(err));
@@ -96,6 +96,7 @@ function App() {
   function handleLogOut(e) {
     e.preventDefault();
     setLoggedIn(false);
+    setSavedMovies([]);
     setCurrentUser({});
     localStorage.clear();
     history.push("/");
@@ -119,6 +120,15 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+
+  function handleUpdateUser(name, email) {
+    const jwt = localStorage.getItem("jwt");
+    MainApi.updateUser(name, email, jwt)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -148,6 +158,7 @@ function App() {
             component={Profile}
             loggedIn={loggedIn}
             onLogOut={handleLogOut}
+            onUpdateProfile={handleUpdateUser}
           />
           <Route path="/signup">
             <Register onRegister={handleRegister} />

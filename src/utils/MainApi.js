@@ -87,6 +87,23 @@ class Api {
       return this._handleResponse(res);
     });
   };
+
+  updateUser(name, email, token) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        name,
+        email,
+      })
+    }).then((res) => {
+      return this._handleResponse(res);
+    });
+  };
 }
 
 const MainApi = new Api({
