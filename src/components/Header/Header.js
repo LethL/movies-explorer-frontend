@@ -1,17 +1,16 @@
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
-import { React, Route, useLocation } from "react-router-dom";
+import { React, Route } from "react-router-dom";
 import Logo from "../Logo/Logo";
 
 function Header(props) {
-    let location = useLocation();
     const paths = ['/', '/movies', '/saved-movies', '/profile'];
 
     return(
         <Route exact path={paths}>
-        <header className={`header ${location.pathname === '/' ? "header_main" : ""}`}>
+        <header className={`header ${props.loggedIn ? "" : "header_main"}`}>
             <Logo />
-            <Navigation />
+            <Navigation loggedIn={props.loggedIn} />
         </header>
         </Route>
     );
