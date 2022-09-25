@@ -19,3 +19,6 @@ https://www.figma.com/file/g978lteb4UEbNQSq41tCmY/Diploma-(Copy)?node-id=344%3A0
 
 ## Домен:
 https://dmitry.diplom.nomoredomains.sbs
+
+## Ссылка на PR:
+https://github.com/LethL/movies-explorer-frontend/pull/2
