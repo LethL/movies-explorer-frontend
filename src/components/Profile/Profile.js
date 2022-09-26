@@ -2,11 +2,14 @@ import React from "react";
 import "./Profile.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import logo from "../../images/success-logo.svg";
 
 function Profile(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const { values, setValues, errors, isValid, handleChange } =
+  const { values, setValues, errors, isValid, handleChange, setIsValid } =
     useFormWithValidation();
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (currentUser) {
@@ -17,9 +20,20 @@ function Profile(props) {
     }
   }, [setValues, currentUser]);
 
+  React.useEffect(() => {
+    if (currentUser.name === values.name && currentUser.email === values.email) {
+      setIsValid(false);
+    }
+  }, [currentUser, values, setIsValid]);
+
   function handleSubmit(e) {
     e.preventDefault();
+    setInfoTooltipOpen(true);
     props.onUpdateProfile(values.name, values.email);
+  }
+
+  function closeTooltip() {
+    setInfoTooltipOpen(false);
   }
 
   return (
@@ -73,6 +87,12 @@ function Profile(props) {
           Выйти из аккаунта
         </button>
       </form>
+      <InfoTooltip
+        isOpen={isInfoTooltipOpen}
+        onClose={closeTooltip}
+        image={logo}
+        message={"Данные успешно обонвлены."}
+      />
     </section>
   );
 }

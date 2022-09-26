@@ -38,9 +38,17 @@ export function useWindowWidth() {
   return windowWidth;
 }
 
-
 export function setDurationMovies(min) {
-  const hours = Math.trunc(min/60);
+  const hours = Math.trunc(min / 60);
   const minutes = min % 60;
   return `${hours}ч ${minutes}м`;
+}
+
+export function fixingMoviesLink(movies) {
+  movies.forEach((movie) => {
+    if (!movie.trailerLink.startsWith("h")) {
+      return (movie.trailerLink =
+        "https://dmitry.diplom.nomoredomains.sbs/404");
+    }
+  });
 }

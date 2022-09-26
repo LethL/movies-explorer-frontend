@@ -3,7 +3,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import api from "../../utils/MoviesApi";
 import React from "react";
-import { filterMovies, filterShortMovies } from "../../utils/utils.js";
+import { filterMovies, filterShortMovies, fixingMoviesLink } from "../../utils/utils.js";
 
 function Movies(props) {
   const handlerCheckbox =
@@ -30,17 +30,24 @@ function Movies(props) {
     setSearchQuery(value);
     localStorage.setItem("searchQuery", value);
     localStorage.setItem("shortMovies", shortMovies);
-    api
+    if(!Movies.length) {
+      api
       .getMovies()
       .then((data) => {
+        fixingMoviesLink(data)
         setMovies(data);
         handlerFilteredMovies(data, value);
+        console.log(data);
       })
       .catch((err) => {
         setisLoadingError(true);
         console.log(err);
       })
       .finally(() => setLoading(false));
+    } else {
+      handlerFilteredMovies(Movies, value, shortMovies)
+      setLoading(false)
+    }
   }
 
   function handlerSetCheckbox(e) {

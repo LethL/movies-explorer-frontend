@@ -13,5 +13,5 @@ export default function useFormWithValidation() {
       setErrors({...errors, [name]: target.validationMessage });
       setIsValid(target.closest("form").checkValidity());
     };
-    return { values, handleChange, errors, isValid, setValues };
+    return { values, handleChange, errors, isValid, setValues, setIsValid };
   }

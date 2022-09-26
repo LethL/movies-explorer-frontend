@@ -188,6 +188,7 @@ function App() {
             loggedIn={loggedIn}
             onLogOut={handleLogOut}
             onUpdateProfile={handleUpdateUser}
+            onClose={handlecloseTooltip}
           />
           <Route path="/signup">
             <Register onRegister={handleRegister} />
