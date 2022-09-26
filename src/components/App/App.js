@@ -7,6 +7,7 @@ import {
   Route,
   Switch,
   useHistory,
+  Redirect
 } from "react-router-dom/cjs/react-router-dom.min";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -40,7 +41,6 @@ function App() {
           .then((res) => {
             if (res) {
               setLoggedIn(true);
-              history.push("/movies");
             }
           })
           .catch((err) => console.log(err));
@@ -193,7 +193,7 @@ function App() {
             <Register onRegister={handleRegister} />
           </Route>
           <Route path="/signin">
-            <Login onLogin={handleLogin} />
+            {loggedIn ? <Redirect to="/movies" /> : <Login onLogin={handleLogin} />}
           </Route>
           <Route path="*">
             <PageNotFound />
