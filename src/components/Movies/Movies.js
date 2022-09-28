@@ -3,7 +3,11 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import api from "../../utils/MoviesApi";
 import React from "react";
-import { filterMovies, filterShortMovies, fixingMoviesLink } from "../../utils/utils.js";
+import {
+  filterMovies,
+  filterShortMovies,
+  fixingMoviesLink,
+} from "../../utils/utils.js";
 
 function Movies(props) {
   const handlerCheckbox =
@@ -28,25 +32,28 @@ function Movies(props) {
   function handlerSearch(value) {
     setLoading(true);
     setSearchQuery(value);
+    const AllMovies = JSON.parse(localStorage.getItem("AllMovies"));
     localStorage.setItem("searchQuery", value);
     localStorage.setItem("shortMovies", shortMovies);
-    if (!Movies.length) {
+    if (!AllMovies) {
       api
-      .getMovies()
-      .then((data) => {
-        fixingMoviesLink(data)
-        setMovies(data);
-        localStorage.setItem("AllMovies", JSON.stringify(data));
-        handlerFilteredMovies(data, value);
-      })
-      .catch((err) => {
-        setisLoadingError(true);
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
+        .getMovies()
+        .then((data) => {
+          fixingMoviesLink(data);
+          setMovies(data);
+          localStorage.setItem("AllMovies", JSON.stringify(data));
+          handlerFilteredMovies(data, value);
+        })
+        .catch((err) => {
+          setisLoadingError(true);
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
     } else {
-      handlerFilteredMovies(Movies, value, shortMovies)
-      setLoading(false)
+      setMovies(AllMovies);
+      handlerFilteredMovies(Movies, value, shortMovies);
+      console.log(filteredMovies);
+      setLoading(false);
     }
   }
 
@@ -65,7 +72,7 @@ function Movies(props) {
 
   React.useEffect(() => {
     const moviesArr = JSON.parse(localStorage.getItem("movies"));
-    if (moviesArr && !searchQuery) {
+    if (moviesArr) {
       setShortMovies(localStorage.getItem("shortMovies"));
       setFilteredMovies(
         shortMovies === "on" ? filterShortMovies(moviesArr) : moviesArr
@@ -83,13 +90,13 @@ function Movies(props) {
   }, [searchQuery, Movies, shortMovies]);
 
   React.useEffect(() => {
-    if (Movies.length) {
-      console.log(Movies.length);
-    } else {
-      const arr = JSON.parse(localStorage.getItem('AllMovies'))
-      setMovies(arr)
+    const AllMovies = JSON.parse(localStorage.getItem("AllMovies"));
+    const localStorageSearch = localStorage.getItem("searchQuery");
+    if (AllMovies) {
+      handlerFilteredMovies(AllMovies, localStorageSearch, shortMovies);
+      handlerNotFoundMovies(AllMovies);
     }
-  }, [ Movies, searchQuery ])
+  }, [shortMovies]);
 
   return (
     <section className="movies">
