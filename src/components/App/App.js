@@ -35,7 +35,11 @@ function App() {
   function tokenCheck() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
+      // const movies = localStorage.getItem('movies');
       if (jwt) {
+        // if (movies) {
+        //   console.log(movies);
+        // }
         auth
           .getContent(jwt)
           .then((res) => {
@@ -150,9 +154,20 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     MainApi.updateUser(name, email, jwt)
       .then((data) => {
+        setStatus({
+          image: successLogo,
+          message: "Данные успешно обновлены.",
+        })
         setCurrentUser(data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setStatus({
+          image: errorLogo,
+          message: "Что-то пошло не так! Попробуйте ещё раз.",
+        })
+        console.log(err)
+      })
+      .finally(() => setInfoTooltipOpen(true));
   };
 
   function handlecloseTooltip() {

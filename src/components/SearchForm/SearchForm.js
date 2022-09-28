@@ -4,29 +4,34 @@ import React from "react";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
 
 function SearchForm(props) {
-  const { values, setValues, isValid, handleChange, errors } =
+  const { values, setValues, isValid, handleChange, setIsValid } =
     useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.Search(values.movie);
+    if (values.movie) {
+      props.Search(values.movie);
+    } else {
+      setIsValid(false);
+    }
   }
 
   React.useEffect(() => {
     if (!props.savedMoviesPage) {
       const input = localStorage.getItem("searchQuery");
       if (input) {
-        setValues(input);
+        setValues({movie : input});
+        setIsValid(true);
       }
     }
-  }, [props.savedMoviesPage, setValues]);
+  }, [props.savedMoviesPage, setValues, setIsValid]);
 
   return (
     <form className="search" onSubmit={handleSubmit}>
       <div className="search__content">
         <input
           className="search__input"
-          required
+          // required
           type="text"
           placeholder="Фильм"
           onChange={handleChange}
@@ -35,12 +40,12 @@ function SearchForm(props) {
           value={values.movie || ""}
         ></input>
         <span className="search__error">
-          {errors.movie ? "Нужно ввести ключевое слово" : ""}
+          {!isValid && !props.savedMoviesPage ? "Нужно ввести ключевое слово" : ""}
         </span>
         <button
           className={`search__btn ${isValid ? "" : "search__btn_disabled"}`}
           type="submit"
-          disabled={!isValid}
+          // disabled={!isValid}
         >
           <img src={searchLogo} alt="Поиск"></img>
         </button>

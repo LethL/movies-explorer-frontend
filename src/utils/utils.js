@@ -44,6 +44,8 @@ export function setDurationMovies(min) {
   return `${hours}ч ${minutes}м`;
 }
 
+
+// Фикс для случая, если у фильма отсутствует ссылка на трейлер
 export function fixingMoviesLink(movies) {
   movies.forEach((movie) => {
     if (!movie.trailerLink.startsWith("h")) {

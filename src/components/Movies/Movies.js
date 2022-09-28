@@ -30,14 +30,14 @@ function Movies(props) {
     setSearchQuery(value);
     localStorage.setItem("searchQuery", value);
     localStorage.setItem("shortMovies", shortMovies);
-    if(!Movies.length) {
+    if (!Movies.length) {
       api
       .getMovies()
       .then((data) => {
         fixingMoviesLink(data)
         setMovies(data);
+        localStorage.setItem("AllMovies", JSON.stringify(data));
         handlerFilteredMovies(data, value);
-        console.log(data);
       })
       .catch((err) => {
         setisLoadingError(true);
@@ -65,7 +65,7 @@ function Movies(props) {
 
   React.useEffect(() => {
     const moviesArr = JSON.parse(localStorage.getItem("movies"));
-    if (moviesArr) {
+    if (moviesArr && !searchQuery) {
       setShortMovies(localStorage.getItem("shortMovies"));
       setFilteredMovies(
         shortMovies === "on" ? filterShortMovies(moviesArr) : moviesArr
@@ -82,12 +82,22 @@ function Movies(props) {
     }
   }, [searchQuery, Movies, shortMovies]);
 
+  React.useEffect(() => {
+    if (Movies.length) {
+      console.log(Movies.length);
+    } else {
+      const arr = JSON.parse(localStorage.getItem('AllMovies'))
+      setMovies(arr)
+    }
+  }, [ Movies, searchQuery ])
+
   return (
     <section className="movies">
       <SearchForm
         Search={handlerSearch}
         onCheckbox={handlerSetCheckbox}
         shortMovies={shortMovies}
+        savedMoviesPage={props.savedMoviesPage}
       />
       <MoviesCardList
         movies={filteredMovies}
