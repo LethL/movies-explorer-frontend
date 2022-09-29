@@ -52,7 +52,6 @@ function Movies(props) {
     } else {
       setMovies(AllMovies);
       handlerFilteredMovies(Movies, value, shortMovies);
-      console.log(filteredMovies);
       setLoading(false);
     }
   }

@@ -35,11 +35,7 @@ function App() {
   function tokenCheck() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      // const movies = localStorage.getItem('movies');
       if (jwt) {
-        // if (movies) {
-        //   console.log(movies);
-        // }
         auth
           .getContent(jwt)
           .then((res) => {
