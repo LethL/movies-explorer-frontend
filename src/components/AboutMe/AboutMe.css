@@ -1,0 +1,148 @@
+.me {
+    padding: 110px 70px 100px;
+}
+
+.me__title {
+    margin: 0;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+}
+
+.me__title::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #000;
+    position: relative;
+    top: 23px;
+}
+
+.me__content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 90px;
+}
+
+.me__photo {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+}
+
+.me__bio {
+    max-width: 600px;
+}
+
+.me__bio-title {
+    margin: 0;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+}
+
+.me__bio-subtitle {
+    margin: 18px 0 26px 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.me__bio-text {
+    margin: 0 0 141px 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.me__bio-link {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 99px;
+    cursor: pointer;
+    transition: opacity .2s linear;
+}
+
+.me__bio-link:hover {
+    opacity: .7;
+}
+
+@media (max-width: 800px) {
+    .me {
+        padding: 90px 50px;
+    }
+
+    .me__bio-title {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .me__bio-subtitle {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 15px 0 20px;
+    }
+
+    .me__bio-text {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 364px;
+    }
+
+    .me__photo {
+        width: 255px;
+        height: 307px;
+    }
+}
+
+@media (max-width: 520px) {
+    .me__content {
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+        margin-top: 88px;
+    }
+
+    .me__bio {
+        margin-top: 40px;
+    }
+
+    .me {
+        padding: 70px 14px;
+    }
+
+    .me__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .me__title::after {
+        top: 28px;
+    }
+
+    .me__photo {
+        width: 292px;
+        height: 352px;
+    }
+
+    .me__bio-title {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .me__bio-subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 20px 0 20px;
+    }
+
+    .me__bio-text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0 0 103px 0;
+    }
+}
